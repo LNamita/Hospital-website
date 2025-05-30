@@ -2,41 +2,62 @@ import React from 'react';
 
 const TrustedCompaniesSection = () => {
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 mt-20"> {/* Increased py and mt for more vertical space */}
+    <section className="gap-3 sm:gap-4 p-3 sm:p-4 md:p-6  mx-2 sm:mx-4 md:mx-8 lg:mx-10 my-3 sm:my-4 md:my-5">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-700 mb-12"> {/* Increased text size and mb */}
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-700 mb-12">
           TRUSTED BY MORE THAN <span className="text-blue-600 font-bold">100+</span> COMPANIES WORLDWIDE
         </h2>
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20"> {/* Increased gap between logos */}
-          {/* Replace src with your actual logo image paths */}
-          <div className="flex items-center justify-center">
-            {/* Increased width and height for bigger logos */}
-            <img src="/logo1.png" alt="Medixo" className="w-12 h-auto object-contain" />
-            {/* Added text back if you want it big, adjusted font size */}
-            <span className="ml-3 text-gray-500 text-xl font-medium">Medixo</span>
-          </div>
-          <div className="flex items-center justify-center">
-            <img src="/logo2.png" alt="Mediweb" className="w-12 h-auto object-contain" />
-            <span className="ml-3 text-gray-500 text-xl font-medium">Mediweb</span>
-          </div>
-          <div className="flex items-center justify-center">
-            <img src="/logo3.png" alt="Labtox" className="w-12 h-auto object-contain" />
-            <span className="ml-3 text-gray-500 text-xl font-medium">Labtox</span>
-          </div>
-          <div className="flex items-center justify-center">
-            <img src="/logo4.png" alt="Patholab" className="w-12 h-auto object-contain" />
-            <span className="ml-3 text-gray-500 text-xl font-medium">Patholab</span>
-          </div>
-          <div className="flex items-center justify-center">
-            <img src="/logo5.png" alt="Medox" className="w-12 h-auto object-contain" />
-            <span className="ml-3 text-gray-500 text-xl font-medium">Medox</span>
-          </div>
-          <div className="flex items-center justify-center">
-            <img src="/logo6.png" alt="Medicross" className="w-12 h-auto object-contain" />
-            <span className="ml-3 text-gray-500 text-xl font-medium">Medicross</span>
+
+        {/* Logo slider container */}
+        <div className="overflow-hidden relative">
+          <div className="flex gap-16 animate-scroll whitespace-nowrap">
+            {[
+              { src: '/logo1.png', name: 'Medixo' },
+              { src: '/logo2.png', name: 'Mediweb' },
+              { src: '/logo3.png', name: 'Labtox' },
+              { src: '/logo4.png', name: 'Patholab' },
+              { src: '/logo5.png', name: 'Medox' },
+              { src: '/logo6.png', name: 'Medicross' },
+              // Duplicate for infinite scroll illusion
+              { src: '/logo1.png', name: 'Medixo' },
+              { src: '/logo2.png', name: 'Mediweb' },
+              { src: '/logo3.png', name: 'Labtox' },
+              { src: '/logo4.png', name: 'Patholab' },
+              { src: '/logo5.png', name: 'Medox' },
+              { src: '/logo6.png', name: 'Medicross' },
+            ].map((company, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 flex items-center mx-4"
+              >
+                <img
+                  src={company.src}
+                  alt={company.name}
+                  className="w-14 h-auto object-contain"
+                />
+                <span className="ml-2 text-gray-500 text-lg font-medium whitespace-nowrap">
+                  {company.name}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Scroll animation */}
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-scroll {
+          animation: scroll 25s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };
