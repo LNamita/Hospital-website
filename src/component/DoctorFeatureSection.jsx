@@ -20,20 +20,15 @@ export default function SearchForm({ categories, treatments, facilities, searchF
                     <label className="block text-blue-950 font-medium text-xs xs:text-sm sm:text-base mb-1">Name</label>
                     <input
                         type="text"
-                        name='name'
-                        placeholder="Type Name"
-                        value={searchFilters?.name}
-                        onChange={handleOnChange}
-                        className="w-full p-2 sm:p-2.5 md:p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-600 placeholder-gray-400 text-xs xs:text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Type A Name"
+                        className="w-full p-3 bg-gray-100 rounded-md text-gray-600 placeholder-gray-400"
                     />
                 </div>
 
                 <div className="col-span-1">
                     <label className="block text-blue-950 font-medium text-xs xs:text-sm sm:text-base mb-1">Treatment</label>
                     <div className="relative">
-                        <select
-                            name='treatment'
-                            className="w-full p-2 sm:p-2.5 md:p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-600 text-xs xs:text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none" value={searchFilters?.treatment} onChange={handleOnChange}>
+                        <select className="w-full appearance-none p-3 bg-gray-100 rounded-md text-gray-600">
                             <option>Select Treatment</option>
                             {treatments?.map((ele, index) => {
                                 return <option value={ele} key={index}>{ele}</option>
@@ -46,12 +41,7 @@ export default function SearchForm({ categories, treatments, facilities, searchF
                 <div className="col-span-1">
                     <label className="block text-blue-950 font-medium text-xs xs:text-sm sm:text-base mb-1">Facility</label>
                     <div className="relative">
-                        <select
-                            name='facility'
-                            className="w-full p-2 sm:p-2.5 md:p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-600 text-xs xs:text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
-                            value={searchFilters?.facility}
-                            onChange={handleOnChange}
-                        >
+                        <select className="w-full appearance-none p-3 bg-gray-100 rounded-md text-gray-600">
                             <option>Select Facility</option>
                             {facilities?.map((ele, index) => {
                                 return <option value={ele} key={index}>{ele}</option>
@@ -65,47 +55,30 @@ export default function SearchForm({ categories, treatments, facilities, searchF
                     <label className="block text-blue-950 font-medium text-xs xs:text-sm sm:text-base mb-1">Location</label>
                     <input
                         type="text"
-                        name='location'
-                        placeholder="City Name"
-                        value={searchFilters?.location}
-                        onChange={handleOnChange}
-                        className="w-full p-2 sm:p-2.5 md:p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-600 placeholder-gray-400 text-xs xs:text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Type City Name"
+                        className="w-full p-3 bg-gray-100 rounded-md text-gray-600 placeholder-gray-400"
                     />
                 </div>
             </div>
 
-            {/* Category Buttons - scrollable on small screens */}
-            <div className="mb-3 sm:mb-4 md:mb-6">
-                <div className="relative">
-                    <div className="flex overflow-x-auto scrollbar-hide pb-2 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap sm:gap-2">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => setActiveCategory(cat)}
-                                className={`flex-shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 md:px-5 md:py-2.5 rounded-full border text-xs xs:text-sm sm:text-base mx-1 sm:mx-0 transition-colors ${activeCategory === cat
-                                    ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                                    }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+            <div className="flex flex-wrap gap-4 mb-6">
+                {categories.map((cat) => (
+                    <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`px-6 py-3 rounded-full border ${activeCategory === cat
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white text-gray-700 border-gray-300'
+                            }`}
+                    >
+                        {cat}
+                    </button>
+                ))}
             </div>
 
-            {/* Search Button - full width on mobile, right-aligned on larger screens */}
-            <div className="flex justify-center sm:justify-end">
-
-                <button
-                    onClick={resetFilters}
-                    className="text-blue-600 hover:text-blue-800 font-medium px-4 py-2 rounded-lg transition-colors duration-200"
-                >
-                    Reset Filters
-                </button>
-                <button className="w-full sm:w-auto flex items-center justify-center gap-1 sm:gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-lg transition-colors duration-200 active:scale-95" onClick={applyFilters}>
-                    <span>Search Now</span>
-                    <ArrowRight size={16} className="hidden xs:inline-block" />
+            <div className="flex justify-end p-4"> {/* This flex container pushes content to the end (right) */}
+                <button className="flex items-center gap-2 bg-emerald-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-600">
+                    Search Now <ArrowRight size={18} />
                 </button>
             </div>
         </div>
